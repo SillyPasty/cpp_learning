@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 struct Test {
@@ -7,8 +7,12 @@ struct Test {
     Test ret() const;
 };
 
-Test& Test::rret() {return *this;}
-Test Test::ret() const {return *this;}
+Test& Test::rret() {
+    return *this;
+}
+Test Test::ret() const {
+    return *this;
+}
 
 int main() {
     Test tes;
@@ -16,7 +20,7 @@ int main() {
     Test ntes = tes.ret();
     ++(ntes.i);
     cout << tes.i << " " << ntes.i << endl;
-    Test &rtes = tes.rret();
+    Test& rtes = tes.rret();
     ++(rtes.i);
     cout << tes.i << " " << rtes.i << endl;
     return 0;

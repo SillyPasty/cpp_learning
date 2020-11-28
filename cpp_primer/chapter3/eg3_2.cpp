@@ -1,25 +1,23 @@
-#include<string>
-#include<iostream>
-#include<cctype>
-using std::string;
-using std::cout;
+#include <cctype>
+#include <iostream>
+#include <string>
 using std::cin;
+using std::cout;
 using std::endl;
+using std::string;
 void eg3_2_3(string s);
-int main()
-{
+int main() {
     string s1;
     string s2(100, 'x');
     cout << s1 << endl;
     if (s1.empty())
         cout << "qaq" << endl;
-    auto c = s2[10]; // c is a char
+    auto c = s2[10];  // c is a char
     for (auto c : s1)
         cout << c << endl;
     // use reference to modify the string's context
     string::size_type n;
-    for (auto &r_c : s2)
-    {
+    for (auto &r_c : s2) {
         r_c = '8';
         break;
     }
@@ -30,8 +28,7 @@ int main()
     return 0;
 }
 
-void eg3_2_3(string s)
-{
+void eg3_2_3(string s) {
     for (decltype(s.size()) i = 0; i < s.size() && !isspace(s[i]); ++i)
         s[i] = toupper(s[i]);
     cout << s << endl;

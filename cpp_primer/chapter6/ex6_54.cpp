@@ -1,12 +1,13 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 using namespace std;
-using PF = int(*)(int, int); // a definition of function pointer.
+using PF = int (*)(int, int);  // a definition of function pointer.
 int add(int a, int b);
 int sub(int a, int b);
 int mul(int a, int b);
 int divi(int a, int b);
-int (*foo(int))(int*, int); // foo is a function, it will return a function with two arguments, and that function will return an int.
+int (*foo(int))(int*, int);  // foo is a function, it will return a function with two
+                             // arguments, and that function will return an int.
 int main() {
     vector<PF> vec;
     vec.push_back(add);

@@ -11,7 +11,7 @@ int main() {
     std::cout << new_val << std::endl;
     int &ref_ref_val = ref_val;
     ref_ref_val++;
-    
+
     std::cout << val << " " << ref_val << std::endl;
     return 0;
 }
