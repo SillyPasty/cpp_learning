@@ -1,6 +1,5 @@
-#include<iostream>
-int main()
-{
+#include <iostream>
+int main() {
     // std::cin >> int input_value;
     std::cout;
 }

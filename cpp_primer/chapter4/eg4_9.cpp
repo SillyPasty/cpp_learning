@@ -1,10 +1,10 @@
-#include<string>
-#include<iostream>
-#include<vector>
-using std::vector;
+#include <iostream>
+#include <string>
+#include <vector>
 using std::cout;
 using std::endl;
 using std::string;
+using std::vector;
 
 int main() {
     vector<int> vi;

@@ -1,17 +1,15 @@
-#include<vector>
-#include<iostream>
-#include<string>
-using std::cout;
+#include <iostream>
+#include <string>
+#include <vector>
 using std::cin;
+using std::cout;
 using std::endl;
-using std::vector;
 using std::string;
-int main()
-{
+using std::vector;
+int main() {
     vector<int> x{1, 2, 3, 4, 5};
     int arr[] = {1, 2, 3};
-    for (auto i = x.begin(); i != x.end(); ++i)
-    {
+    for (auto i = x.begin(); i != x.end(); ++i) {
         cout << *i << endl;
     }
     string s("hello world!");
@@ -20,12 +18,10 @@ int main()
     return 0;
 }
 
-void binary_search(vector<int> v, int target)
-{
+void binary_search(vector<int> v, int target) {
     auto beg = v.begin(), end = v.end();
     auto mid = beg + (end - beg) / 2;
-    while (mid != end && *mid != target)
-    {
+    while (mid != end && *mid != target) {
         if (*mid > target)
             beg = mid + 1;
         if (*mid < target)

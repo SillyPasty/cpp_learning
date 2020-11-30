@@ -1,4 +1,4 @@
-#include"Person.h"
+#include "Person.h"
 
 std::istream &read(std::istream &is, Person &person) {
     is >> person.p_name >> person.p_address;

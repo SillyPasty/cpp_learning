@@ -1,15 +1,13 @@
-#include<string>
-#include<iostream>
-using std::string;
-using std::cout;
+#include <iostream>
+#include <string>
 using std::cin;
+using std::cout;
 using std::endl;
-int main()
-{
+using std::string;
+int main() {
     string s1;
     // while (getline(cin, s1))
-    while (cin >> s1)
-    {
+    while (cin >> s1) {
         cout << s1 << endl;
     }
     return 0;
