@@ -1,13 +1,13 @@
-#include<iostream>
-#include<fstream>
-#include<string>
+#include <fstream>
+#include <iostream>
+#include <string>
 using std::cout;
 using std::endl;
-using std::string;
 using std::ifstream;
-using std::ofstream;
 using std::istream;
+using std::ofstream;
 using std::ostream;
+using std::string;
 int main(int argc, char* argv[]) {
     ifstream input(argv[1]);
     ofstream output(argv[2], ofstream::app);
@@ -21,5 +21,5 @@ int main(int argc, char* argv[]) {
     output << s;
     output.close();
     input.close();
-    return 0;    
+    return 0;
 }

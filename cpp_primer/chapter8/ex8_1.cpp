@@ -1,8 +1,8 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 using namespace std;
 
-istream& cin_test(istream &);
+istream& cin_test(istream&);
 
 int main() {
     cin_test(cin);
@@ -17,7 +17,7 @@ istream& cin_test(istream& is) {
     }
     auto old_state = is.rdstate();
     cout << endl;
-    cout << old_state << endl; 
+    cout << old_state << endl;
     if (cin.good())
         cout << "good!" << endl;
     if (cin.eof())

@@ -1,14 +1,14 @@
-#include<sstream>
-#include<string>
-#include<vector>
-#include<iostream>
-using std::vector;
-using std::string;
-using std::istringstream;
-using std::ostringstream;
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
 using std::cin;
 using std::cout;
 using std::endl;
+using std::istringstream;
+using std::ostringstream;
+using std::string;
+using std::vector;
 
 struct PersonInfo {
     string name;

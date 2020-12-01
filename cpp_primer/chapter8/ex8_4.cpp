@@ -1,8 +1,8 @@
-#include<vector>
-#include<fstream>
-#include<iostream>
+#include <fstream>
+#include <iostream>
+#include <vector>
 using namespace std;
-int main (int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
     ifstream input(argv[1]);
     vector<string> buffer;
     if (input) {

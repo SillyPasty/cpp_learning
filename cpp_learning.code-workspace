@@ -6,7 +6,8 @@
 	],
 	"settings": {
 		"files.associations": {
-			"initializer_list": "cpp"
+			"initializer_list": "cpp",
+			"iosfwd": "cpp"
 		},
 		"C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, UseTab: Never, IndentWidth: 4, TabWidth: 4, ColumnLimit: 90, AccessModifierOffset: -4, AllowShortIfStatementsOnASingleLine: false, AllowShortLoopsOnASingleLine: false, AllowShortFunctionsOnASingleLine: Empty}",
 		"indentRainbow.ignoreErrorLanguages": [
