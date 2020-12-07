@@ -1,4 +1,4 @@
-#include "StrBlob.h"
+#include "StrBlobPtr.h"
 
 StrBlob::StrBlob() : data(std::make_shared<std::vector<std::string>>()) {}
 StrBlob::StrBlob(std::initializer_list<std::string> i1)
@@ -21,4 +21,13 @@ std::string& StrBlob::back() const {
 void StrBlob::pop_back() {
     check(0, "pop_back on empty StrBlob");
     data->pop_back();
+}
+
+StrBlobPtr StrBlob::begin() {
+    return StrBlobPtr(*this);
+}
+
+StrBlobPtr StrBlob::end() {
+    auto ret = StrBlobPtr(*this, data->size());
+    return ret;
 }

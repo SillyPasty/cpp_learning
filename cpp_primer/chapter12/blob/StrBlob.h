@@ -3,7 +3,11 @@
 #include <memory>
 #include <string>
 #include <vector>
+
+class StrBlobPtr;
 class StrBlob {
+    friend class StrBlobPtr;
+
 public:
     typedef std::vector<std::string>::size_type size_type;
     StrBlob();
@@ -15,13 +19,16 @@ public:
         return data->empty();
     }
     // add and remove elements
-    void bush_back(const std::string& t) {
+    void push_back(const std::string& t) {
         data->push_back(t);
     }
     void pop_back();
     // access elements
     std::string& front() const;
     std::string& back() const;
+
+    StrBlobPtr begin();
+    StrBlobPtr end();
 
 private:
     std::shared_ptr<std::vector<std::string>> data;
