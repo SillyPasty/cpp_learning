@@ -46,6 +46,7 @@ void biggies(vector<string> &words, vector<string>::size_type sz) {
                          [sz](const string &s) { return s.size() >= sz; });
     cout << words.end() - count << endl;
     for_each(count, words.end(), [](const string &s) { cout << s << " "; });
+
     cout << endl;
 }
 
