@@ -2,7 +2,9 @@
 
 #include <algorithm>
 #include <utility>
+
 std::allocator<std::string> StrVec::alloc;
+
 void StrVec::push_back(const std::string &s) {
     chk_n_alloc();
     alloc.construct(first_free++, s);
@@ -27,8 +29,21 @@ StrVec::StrVec(const StrVec &s) {
     first_free = cap = new_data.second;
 }
 
+StrVec::StrVec(StrVec &&s) noexcept
+    : elements(s.elements), first_free(s.first_free), cap(s.cap) {
+    s.elements = s.first_free = s.cap = nullptr;
+}
+
 StrVec::~StrVec() {
     free();
+}
+
+StrVec &StrVec::operator=(const StrVec &rhs) {
+    auto data = alloc_n_copy(rhs.begin(), rhs.end());
+    free();
+    elements = data.first;
+    first_free = cap = data.second;
+    return *this;
 }
 
 void StrVec::reallocate() {
