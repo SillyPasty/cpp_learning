@@ -8,7 +8,7 @@ public:
     Bulk_quote(const std::string& book, double p, std::size_t qty, double disc)
         : Quote(book, p), min_qty(qty), discount(disc) {}
     double net_price(std::size_t) const override;
-    // void debug(std::ostream&) const override;
+    void debug(std::ostream&) const override;
 
 private:
     std::size_t min_qty = 0;
@@ -21,10 +21,5 @@ inline double Bulk_quote::net_price(std::size_t cnt) const {
     else
         return cnt * price;
 }
-
-// inline void Bulk_quote::debug(std::ostream& os) const {
-//     Quote::debug(os);
-//     os << ", min_qty: " << min_qty << ", discount: " << discount;
-// }
 
 #endif
