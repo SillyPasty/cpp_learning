@@ -14,7 +14,7 @@ public:
     virtual double net_price(std::size_t n) const {
         return n * price;
     }
-    // virtual void debug(std::ostream &) const;
+    virtual void debug(std::ostream &) const;
 
     virtual ~Quote() = default;
 
@@ -25,15 +25,4 @@ protected:
     double price = 0.0;
 };
 
-// inline std::string Quote::isbn() const {
-//     return bookNo;
-// }
-
-// inline double Quote::net_price(std::size_t n) const {
-//     return n * price;
-// }
-
-// inline void Quote::debug(std::ostream &os) const {
-//     os << "Book No: " << isbn() << ", price: " << price;
-// }
 #endif

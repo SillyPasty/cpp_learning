@@ -3,4 +3,4 @@
 **/*.out
 .vscode/
 **/temp
-# *.code-workspace
+*.code-workspace
