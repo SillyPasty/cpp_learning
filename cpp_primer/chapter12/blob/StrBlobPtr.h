@@ -1,6 +1,6 @@
 #ifndef STRBLOBPTR
 #define STRBLOBPTR
-// #include <memory>
+#include <memory>
 
 #include "StrBlob.h"
 

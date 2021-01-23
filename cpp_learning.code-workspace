@@ -63,5 +63,6 @@
 			"/[ \t]* [*]/g", // lines begining with <whitespace><space>*
 			"/[ \t]+[/]{2}/g", // lines begininning with <whitespace>//
 		],
+		"editor.formatOnSave": true,
 	}
 }
