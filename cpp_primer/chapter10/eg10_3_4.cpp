@@ -13,7 +13,9 @@ int main() {
     vector<string> v({"hello", "hello_world!"});
     stable_sort(v.begin(), v.end(),
                 [](const string &s1, const string &s2) { return s1.size() < s2.size(); });
-    auto wc = find_if(v.begin(), v.end(), bind(check_size, std::placeholders::_1, sz));
+    auto wc = find_if(v.begin(), v.end(), 1
+
+    );
     auto &os = cout;
     for_each(wc, v.end(), [&](const string &s) { os << s << " "; });
 

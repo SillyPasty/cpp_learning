@@ -1,6 +1,8 @@
 #include "strvec.h"
 
 #include <algorithm>
+#include <iterator>
+#include <memory>
 #include <utility>
 
 std::allocator<std::string> StrVec::alloc;
@@ -46,17 +48,25 @@ StrVec &StrVec::operator=(const StrVec &rhs) {
     return *this;
 }
 
+StrVec &StrVec::operator=(StrVec &&rhs) noexcept {
+    if (this != &rhs) {
+        free();
+        elements = rhs.elements;
+        first_free = rhs.first_free;
+        cap = rhs.cap;
+        rhs.elements = rhs.first_free = rhs.cap = nullptr;
+    }
+    return *this;
+}
+
 void StrVec::reallocate() {
     auto newcapacity = size() ? 2 * size() : 1;
-    auto newdata = alloc.allocate(newcapacity);
-    auto dest = newdata;
-    auto elem = elements;
-    // move old to new
-    for (size_t i = 0; i != size(); ++i) alloc.construct(dest++, std::move(*elem++));
+    auto first = alloc.allocate(newcapacity);
+    auto last = std::uninitialized_copy(make_move_iterator(begin()),
+                                        make_move_iterator(end()), first);
     free();
-    // update
-    elements = newdata;
-    first_free = dest;
+    elements = first;
+    first_free = last;
     cap = elements + newcapacity;
 }
 

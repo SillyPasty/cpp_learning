@@ -8,6 +8,9 @@ class HasPtr {
 public:
     HasPtr(const std::string &s = std::string())
         : ps(new std::string(s)), i(0), use(new std::size_t(1)), index(index_counter++) {}
+    HasPtr(HasPtr &&p) noexcept : ps(p.ps), i(p.i) {
+        p.ps = 0;
+    }
     HasPtr(const HasPtr &);
     // HasPtr &operator=(const HasPtr &);
     HasPtr &operator=(HasPtr);
