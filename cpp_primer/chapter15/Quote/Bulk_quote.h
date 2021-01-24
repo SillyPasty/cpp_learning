@@ -1,14 +1,21 @@
 #ifndef BULK_QUOTE_HPP
 #define BULK_QUOTE_HPP
-#include "Quote.h"
+#include "Disc_quote.h"
 
-class Bulk_quote : public Quote {
+class Bulk_quote : public Disc_quote {
 public:
-    Bulk_quote() = default;
-    Bulk_quote(const std::string& book, double p, std::size_t qty, double disc)
-        : Quote(book, p), min_qty(qty), discount(disc) {}
+    // Bulk_quote() = default;
+    // Bulk_quote(const std::string& book, double p, std::size_t qty, double disc)
+    //     : Disc_quote(book, p, qty, disc) {}
+    using Disc_quote::Disc_quote;  // the same as previous lines
     double net_price(std::size_t) const override;
-    void debug(std::ostream&) const override;
+    void debug(std::ostream &) const override;
+    virtual Bulk_quote *clone() const & {
+        return new Bulk_quote(*this);
+    }
+    virtual Bulk_quote *clone() const && {
+        return new Bulk_quote(std::move(*this));
+    }
 
 private:
     std::size_t min_qty = 0;
