@@ -1,5 +1,7 @@
+#include <exception>
 #include <iostream>
 #include <memory>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -41,10 +43,17 @@ private:
 };
 
 template <typename T>
-Blob<T>::Blob() : data(std::make_shared<std::vector<T>>()) {}
+Blob<T>::Blob() try : data(std::make_shared<std::vector<T>>()) {
+} catch (const std::bad_alloc &e) {
+    std::cerr << e.what() << '\n';
+}
 
 template <typename T>
-Blob<T>::Blob(std::initializer_list<T> il) : data(std::make_shared<std::vector<T>>(il)) {}
+Blob<T>::Blob(std::initializer_list<T> il) try
+    : data(std::make_shared<std::vector<T>>(il)) {
+} catch (const std::bad_alloc &e) {
+    std::cerr << e.what() << '\n';
+}
 
 template <typename T>
 void Blob<T>::check(size_type i, const std::string &msg) const {
