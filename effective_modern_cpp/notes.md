@@ -159,3 +159,88 @@ Widget w;
 auto pri = static_cast<bool>(features(w)[5]); // good and right!
 ```
 
+# Chapter3-Modern C++
+
+## Item7 (), {}, =
+
+- Braced initialization is the most widely usable initialization syntax, it prevents **narrowing conversions**, and it's **immune to c++'s most vexing parse**.
+  - Widge w(); Is a declaration of a function
+  - Widge w{}; The ctor of the class
+- During the constructor overload resolution, braced initializers are matched to **std::initializer_list** parameters if at all possible, even if other constructors offer seemingly better matched.
+
+## Item8 Prefer nullptr to 0 and NULL
+
+- neither 0 or NULL has a pointer type?
+- When you want to refer to a null pointer, use **nullptr**
+- 0 and NULL are **int** or **int-like-type**
+
+## Item9 Prefer using to typedefs
+
+```c++
+typedef void *(FP)(int, const std::string&);
+using FP = void (*)(int, const std::string&);
+
+template<typename T>
+using MyAlllocList = std::list<T, MyAlloc<T>>;
+
+template<typename T>
+struct MyAllocList {
+    typedef std::list<T, MyAlloc<T>> type;
+}
+// MyAllocList<int> VS MyAllocList<int>::type
+```
+
+- using support templates!
+- Alias avoid the **::type** and **typename** needed by dependent type
+  - Because for different T of the template, **::type** may be different (even not type!), so **typename** is needed in dependent type.
+
+## Item10 Prefer scoped enums to unscoped enums
+
+- Scoped ads
+
+  - Do not leak
+  - Prevent implicitly convert
+  - May be forward-declared
+
+- Because of the prevention of implicitly convert, we can use
+
+  ```c++
+  template<typename E> // C++14
+  constexpr std::underlying_type_t<E>
+  toUType(E enumerator) noexcept
+  {
+  	return static_cast<std::underlying_type_t<E>>(enumerator);
+  }
+  
+  auto val = std::get<toUType(UserInfoFields::uiEmail)>(uInfo); // uInfo is a tuple, UserInfoFields is an enum
+  ```
+
+## Item11 Delete
+
+- delete can be used to prevent the use of some template
+
+```c++
+template<typename T>
+void processPointer(T* ptr);
+
+template<>
+void processPointer<void>(void*) = delete;
+template<>
+void processPointer<char>(char*) = delete;
+```
+
+- Prefer deleted functions to private undefined ones
+
+## Item12 Declare overriding function *override*
+
+- For overriding to occur, serval requirements must be met
+  - The base class function must be virtual
+  - The base and derived function names must be identical (except in the case of destructors)
+  - The parameter types of the base and derived functions must be identical
+  - The constness of the base and derived functions must be identical
+  - The return types and exception specifications of the base and derived functions must be compatible.
+  - The functions' reference qualifiers must be identical. (the limit of *this*)
+- Use declare the overriding function **override** !!!
+  - Allow compliers to detect mistakes
+  - Less test when changing function signature
+
