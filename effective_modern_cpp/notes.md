@@ -244,3 +244,36 @@ void processPointer<char>(char*) = delete;
   - Allow compliers to detect mistakes
   - Less test when changing function signature
 
+## Item13 Prefer *const_iterators* to *iterators*
+
+- Prefer **const_iterators** to **iterators**
+- Prefer non-member versions of **begin end rbegin**
+  - Some third-party libraries only have non-member function.
+
+## Item14 *noexcept*
+
+- optimizers need not keep the runtime stack in an unwindable state, nor must they ensure that objects in a **noexcept** function are destroyed in the inverse order of construction should an exception leave the function.
+- Exception-neutral functions are never **noexcept**, because they may emit passing through exceptions.
+- **noexcept** is particularly valuable for the move operations, **swap**, memory deallocation functions and destructors.
+  - For example, vector will only use **move** for the elements with **noexcept ** moving constructer, when its space is not enough.
+
+## Item15 Use *constexpr* whenever possible
+
+- **constexpr** objects are **const** and are initialized with values known during compilation
+- **constexpr** functions can produce compile-time results when called with arguments whose values are known during compilation
+
+## Item16 Make *const* member functions thread safe
+
+- mutable
+  - a **mutable** in a class can be modified by a **const** function.
+  - **mutable** allows lambda to change the variable out of its range.
+- Use of **std::atomic** variables may offer better performance than a mutex, but they are suited for manipulation of only a single variable or memory location. (Two atomic executions are not atomic!)
+
+## Item17 Understand special member function generation
+
+- Special members: **constructor, destructor, copy operations, move operations**
+- **Move operations** are generated only for classes lacking explicitly declared move operations, copy operations, and a destructor.
+- **Copy constructor** is generated only for classes lacking an explicitly declared copy constructor, and it's deleted if a move operation is declared.
+- **Copy assignment operator** is generated only for classes lacking an explicitly declared copy assignment operator, and it's deleted if a move operation is declared. Generation of the copy operations in classes with an explicitly declared destructor is deprecated.
+- Member function templates never suppress generation of special member functions
+- Can use explicitly defined **=default** to tell the complier to create the members.
