@@ -267,6 +267,7 @@ void processPointer<char>(char*) = delete;
 - mutable
   - a **mutable** in a class can be modified by a **const** function.
   - **mutable** allows lambda to change the variable out of its range.
+  - Because of **mutable**, **const** function member may not be thread safe.
 - Use of **std::atomic** variables may offer better performance than a mutex, but they are suited for manipulation of only a single variable or memory location. (Two atomic executions are not atomic!)
 
 ## Item17 Understand special member function generation
@@ -277,3 +278,39 @@ void processPointer<char>(char*) = delete;
 - **Copy assignment operator** is generated only for classes lacking an explicitly declared copy assignment operator, and it's deleted if a move operation is declared. Generation of the copy operations in classes with an explicitly declared destructor is deprecated.
 - Member function templates never suppress generation of special member functions
 - Can use explicitly defined **=default** to tell the complier to create the members.
+
+# Chapter4 Smart Pointer
+
+## Item18 Using *std::unique_ptr* for exclusive-ownership resource management
+
+- **std::unique_ptr** always owns what it points to, and moving it will transfer ownership. Not allow **copy**, it is a *move_only* type.
+- Can be used in factory function.
+- By default, resource destruction takes place via **delete**, but custom deleters can be specified. Stateful deleters and function pointers as deleters increase the size of **std::unique_ptr** objects.
+  - Using **lambda** will not increase the size.
+- Converting a **std::unique_ptr** to a **std::shared_ptr** is easy.
+
+## Item 19 *std::shared_ptr*
+
+- **std::shared_ptrs** are twice the size of a raw pointer (**FIXED**)
+  - ![image-20210201111601066](C:\Users\11790\AppData\Roaming\Typora\typora-user-images\image-20210201111601066.png)
+  - The control block is stored as dynamically allocated data
+- Increments and decrements of the reference count must be atomic
+- For the control Block
+  - **std::make_shared** always creates a control block
+  - A control block is created when a **std::shared_ptr** is constructed from a unique-ownership pointer
+  - When a **std::shared_ptr** constructor is called with a raw pointer, it creates a control block.
+  - **So, constructing more than one std::shared_ptr from a single raw pointer may have undefined behavior!!**
+    - Will be destroyed multiple times
+- Use classes that inherits from **std::enable_shared_from_this**, and use **shared_from_this()**
+  - avoid the use of *this
+- The type of deleter has no effect on the type of the **std::shared_ptr**
+
+## Item20  Use std::weak_ptr for std::shared_ptr like pointers that can dangle.
+
+- **std::weak_ptr** are used for **std::shared_ptr**-like pointers that can dangle.
+- Potential use cases for **std::weak_ptr** include caching, observer lists and the prevention of **std::shared_ptr** cycles.
+- ![image-20210201113924820](C:\Users\11790\AppData\Roaming\Typora\typora-user-images\image-20210201113924820.png)
+
+## Item21 Prefer std::make_unique and std::make_shared to direct use of new.
+
+## Item22 When using the Pimpl Idiom, define special member functions in the implementation file.
